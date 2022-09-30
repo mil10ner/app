@@ -1,0 +1,28 @@
+version: '4.12'
+
+services:
+  web:
+    build: .
+    command:
+      sh -c "python manage.py migrate &&
+       python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/usr/src/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=kanalservis
+      - POSTGRES_DB=google_sheets
+volumes:
+  postgres_data:

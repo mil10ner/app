@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            {{ title }}
+        {% endblock title %}
+    </title>
+</head>
+<body>
+    <div id="index"></div>
+    {% block body %}
+        <table>
+            <tr>
+                <th>Номер</th>
+                <th>Номер заказа</th>
+                <th>Цена дол.</th>
+                <th>Цена руб.</th>
+                <th>Срок поставки</th>
+              </tr>
+        {% for s in list_static %}
+              <tr>
+                <td>{{ s.number }}</td>
+                <td>{{ s.order_number }}</td>
+                <td>{{ s.price_usd }}</td>
+                <td>{{ s.price_rub }}</td>
+                <td>{{ s.delivery_time }}</td>
+              </tr>
+        {% endfor %}
+        </table>
+    {% endblock body %}
+</body>
+</html>
